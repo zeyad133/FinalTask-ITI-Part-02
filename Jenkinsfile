@@ -5,30 +5,31 @@ pipeline {
             steps {
                 // Get some code from a GitHub repository
                  git branch: 'main',
-                    url: 'https://github.com/abdelrhman14/Simple-Application-Nodejs-Part2.git'
+                    url: 'https://github.com/zeyad133/LastProject-part2.git'
 
             }
         }
-        stage('continuous integration') {
+        stage('CI') {
             steps {
-                  withCredentials([usernamePassword(credentialsId: 'dockerhub_key', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
+                  withCredentials([usernamePassword(credentialsId: 'dockerhubkey', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')])
                 {
                     sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-                    sh "docker build -t nodejs-image33 ."
-                    sh "docker tag nodejs-image33:latest abdelrahman1413/nodejs-image33"
-                    sh "docker push abdelrahman1413/nodejs-image33"
+                    sh "docker build -t appimage22 ."
+                    sh "docker tag appimage22:latest zeyad13/appimage22"
+                    sh "docker push zeyad13/appimage22"
                     
                 }
             }    
         }
-         stage ('deployment application'){
+         stage ('dep app'){
             steps {
             
                           sh """
-                    kubectl apply -f deployment.yml -n application
-                    kubectl apply -f app_loadbalancer.yml -n application
+                    kubectl create namespace application
+                    kubectl apply -f app-deployment.yml -n application
+                    kubectl apply -f app-svc.yml -n application
 
-                echo Successful
+                echo done
             """
             }
         
