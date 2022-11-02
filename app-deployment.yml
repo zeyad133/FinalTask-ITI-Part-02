@@ -1,1 +1,23 @@
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejsApp
+  namespace: application
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nodejsApp
+  template:
+    metadata:
+      labels:
+        app: nodejsApp
+    spec:
+      containers:
+        - name: nodejsApp
+          image: docker.io/zeyad13/appimage22
+          ports:
+            - name: httpport
+              containerPort: 3000
+      
