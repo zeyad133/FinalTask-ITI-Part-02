@@ -8,14 +8,14 @@ spec:
   replicas: 5
   selector:
     matchLabels:
-      app: nodejsApp
+      app: nodejsapp
   template:
     metadata:
       labels:
-        app: nodejsApp
+        app: nodejsapp
     spec:
       containers:
-        - name: nodejsApp
+        - name: nodejsapp
           image: docker.io/zeyad13/appimage22
           ports:
             - name: httpport
