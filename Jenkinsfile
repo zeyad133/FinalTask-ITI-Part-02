@@ -25,7 +25,7 @@ pipeline {
             steps {
             
                           sh """
-                    kubectl create namespace application
+                    //kubectl create namespace application
                     kubectl apply -f app-deployment.yml -n application
                     kubectl apply -f app-svc.yml -n application
 
